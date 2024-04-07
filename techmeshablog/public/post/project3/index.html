@@ -1,0 +1,470 @@
+<!doctype html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<html
+  class="not-ready lg:text-base"
+  style="--bg: #faf8f1"
+  lang="en"
+>
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, shrink-to-fit=no"
+  />
+
+  
+  <title>Game Deployment: CI/CD Pipeline from GitHub to AWS S3 - Tech Mesha</title>
+
+  
+  <meta name="theme-color" />
+
+  
+  
+  
+  
+  <meta name="description" content="CI/CD stands for Continuous Integration and Continuous Deployment is a simplified process that automates the different stages, such as building, testing and deploying, of developing software. As software is developed using CI/CD, developers guarantee that it is continuously left in a deployable condition. Changes in the code are integrated safely and as soon as feasible in this case in a practical setting. This development methodology shortens the development cycle while increasing the quality of the program in question by allowing for quick and often deployment." />
+  <meta name="author" content="TechMesha" />
+  
+
+  
+  
+  
+  
+  
+  
+  <link rel="preload stylesheet" as="style" href="http://localhost:1313/main.min.css" />
+
+  
+  
+  
+  
+  
+  <link rel="preload" as="image" href="http://localhost:1313/theme.png" />
+
+  
+  
+  
+  
+  <link rel="preload" as="image" href="https://i.ibb.co/qsPSHN4/mesha-logo-1.png" />
+  
+  
+
+  
+  
+  <link rel="preload" as="image" href="http://localhost:1313/twitter.svg" />
+  
+  <link rel="preload" as="image" href="http://localhost:1313/github.svg" />
+  
+  <link rel="preload" as="image" href="http://localhost:1313/linkedin.svg" />
+  
+  
+
+  
+  
+  <script
+    defer
+    src="http://localhost:1313/highlight.min.js"
+    onload="hljs.initHighlightingOnLoad();"
+  ></script>
+  
+
+  
+  
+  
+
+  
+  <link rel="icon" href="http://localhost:1313/favicon.ico" />
+  <link rel="apple-touch-icon" href="http://localhost:1313/apple-touch-icon.png" />
+
+  
+  <meta name="generator" content="Hugo 0.124.1">
+
+  
+  
+  
+</head>
+
+  <body class="text-black duration-200 ease-out dark:text-white">
+    <header class="mx-auto flex h-[4.5rem] max-w-3xl px-8 lg:justify-center">
+  <div class="relative z-50 mr-auto flex items-center">
+    <a
+      class="-translate-x-[1px] -translate-y-[1px] text-2xl font-semibold"
+      href="http://localhost:1313/"
+      >Tech Mesha</a
+    >
+    <div
+      class="btn-dark text-[0] ml-4 h-6 w-6 shrink-0 cursor-pointer [background:url(./theme.png)_left_center/_auto_theme('spacing.6')_no-repeat] [transition:_background-position_0.4s_steps(5)] dark:[background-position:right]"
+      role="button"
+      aria-label="Dark"
+    ></div>
+  </div>
+
+  <div
+    class="btn-menu relative z-50 -mr-8 flex h-[4.5rem] w-[5rem] shrink-0 cursor-pointer flex-col items-center justify-center gap-2.5 lg:hidden"
+    role="button"
+    aria-label="Menu"
+  ></div>
+
+  
+
+  <script>
+    
+    const htmlClass = document.documentElement.classList;
+    setTimeout(() => {
+      htmlClass.remove('not-ready');
+    }, 10);
+
+    
+    const btnMenu = document.querySelector('.btn-menu');
+    btnMenu.addEventListener('click', () => {
+      htmlClass.toggle('open');
+    });
+
+    
+    const metaTheme = document.querySelector('meta[name="theme-color"]');
+    const lightBg = '#faf8f1'.replace(/"/g, '');
+    const setDark = (isDark) => {
+      metaTheme.setAttribute('content', isDark ? '#000' : lightBg);
+      htmlClass[isDark ? 'add' : 'remove']('dark');
+      localStorage.setItem('dark', isDark);
+    };
+
+    
+    const darkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+    if (htmlClass.contains('dark')) {
+      setDark(true);
+    } else {
+      const darkVal = localStorage.getItem('dark');
+      setDark(darkVal ? darkVal === 'true' : darkScheme.matches);
+    }
+
+    
+    darkScheme.addEventListener('change', (event) => {
+      setDark(event.matches);
+    });
+
+    
+    const btnDark = document.querySelector('.btn-dark');
+    btnDark.addEventListener('click', () => {
+      setDark(localStorage.getItem('dark') !== 'true');
+    });
+  </script>
+
+  <div
+    class="nav-wrapper fixed inset-x-0 top-full z-40 flex h-full select-none flex-col justify-center pb-16 duration-200 dark:bg-black lg:static lg:h-auto lg:flex-row lg:!bg-transparent lg:pb-0 lg:transition-none"
+  >
+    
+    
+    <nav class="lg:ml-12 lg:flex lg:flex-row lg:items-center lg:space-x-6">
+      
+      <a
+        class="block text-center text-2xl leading-[5rem] lg:text-base lg:font-normal"
+        href="/about/"
+        >About</a
+      >
+      
+      <a
+        class="block text-center text-2xl leading-[5rem] lg:text-base lg:font-normal"
+        href="/contact/"
+        >Contact</a
+      >
+      
+    </nav>
+    
+
+    
+    <nav
+      class="mt-12 flex justify-center space-x-10 dark:invert lg:ml-12 lg:mt-0 lg:items-center lg:space-x-6"
+    >
+      
+      <a
+        class="h-8 w-8 text-[0] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./twitter.svg)"
+        href="https://twitter.com/mesha_ca"
+        target="_blank"
+        rel="me"
+      >
+        twitter
+      </a>
+      
+      <a
+        class="h-8 w-8 text-[0] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./github.svg)"
+        href="https://github.com/Meshaa0"
+        target="_blank"
+        rel="me"
+      >
+        github
+      </a>
+      
+      <a
+        class="h-8 w-8 text-[0] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./linkedin.svg)"
+        href="https://linkedin.com/in/mashalalbalooshi/"
+        target="_blank"
+        rel="me"
+      >
+        linkedin
+      </a>
+      
+    </nav>
+    
+  </div>
+</header>
+
+
+    <main
+      class="prose prose-neutral relative mx-auto min-h-[calc(100%-9rem)] max-w-3xl px-8 pb-16 pt-12 dark:prose-invert"
+    >
+      
+
+<article>
+  <header class="mb-16">
+    <h1 class="!my-0 pb-2.5">Game Deployment: CI/CD Pipeline from GitHub to AWS S3</h1>
+
+    
+    <div class="text-sm antialiased opacity-60">
+      
+      <time>Apr 4, 2024</time>
+      
+      
+      
+      
+      <span class="mx-1">&middot;</span>
+      <span>TechMesha</span>
+      
+    </div>
+    
+  </header>
+
+  <section><p>CI/CD stands for Continuous Integration and Continuous Deployment is a simplified process that automates the different stages, such as building, testing and deploying, of developing software. As software is developed using CI/CD, developers guarantee that it is continuously left in a deployable condition. Changes in the code are integrated safely and as soon as feasible in this case in a practical setting. This development methodology shortens the development cycle while increasing the quality of the program in question by allowing for quick and often deployment.</p>
+<p><a href="https://imgbb.com/"><img src="https://i.ibb.co/q9wCMWF/React-App-with-Amplify-Cognito-and-CI-CD-with-Git-Hub.png" alt="React-App-with-Amplify-Cognito-and-CI-CD-with-Git-Hub" border="0"></a><br /></p>
+<h2 id="technologies-used">Technologies Used</h2>
+<ol>
+<li><strong>GitHub:</strong> A versatile platform for version control and collaboration, facilitating code management and team cooperation.</li>
+<li><strong>Amazon S3:</strong> A scalable cloud storage service by AWS, enabling secure data storage, website hosting, and file management.</li>
+<li><strong>AWS CodePipeline:</strong> An automated CI/CD service orchestrating software delivery stages for streamlined development processes.</li>
+</ol>
+<h2 id="01-create-an-s3-bucket">01: Create an S3 Bucket</h2>
+<p>To begin hosting your static website, follow these steps:</p>
+<ol>
+<li>Navigate to the Amazon S3 section of the AWS Management Console <a href="https://console.aws.amazon.com/s3/">https://console.aws.amazon.com/s3/</a></li>
+<li>Click &ldquo;Create bucket&rdquo;.</li>
+<li>You should choose a unique name for your bucket.</li>
+<li>Select the desired region for your bucket.</li>
+<li>In the section concerning public access settings, ensure the box labeled &ldquo;Block all public access&rdquo; is unchecked.</li>
+<li>Maintain default settings and create the bucket by clicking &ldquo;Create&rdquo;.</li>
+</ol>
+<p><a href="https://ibb.co/xGgjtwJ"><img src="https://i.ibb.co/TR08xJm/Screenshot-from-2024-04-03-17-58-45.png" alt="Screenshot-from-2024-04-03-17-58-45" border="0"></a></p>
+<p><strong><center> . . .</center></strong></p>
+<h2 id="02-host-using-s3-bucket">02: Host Using S3 Bucket</h2>
+<ol>
+<li>Access your created bucket and navigate to &ldquo;Properties&rdquo;.</li>
+<li>Under &ldquo;Static website hosting&rdquo;, click &ldquo;edit&rdquo;.</li>
+<li>Choose &ldquo;Enable&rdquo; for Static website hosting.</li>
+<li>Specify the names of your index.html and error.html files.</li>
+<li>Maintain existing settings and click &ldquo;Save changes&rdquo; to finalize.</li>
+</ol>
+<p><a href="https://ibb.co/xGgjtwJ"><img src="https://i.ibb.co/TR08xJm/Screenshot-from-2024-04-03-17-58-45.png" alt="Screenshot-from-2024-04-03-17-58-45" border="0"></a></p>
+<p><a href="https://ibb.co/gFFV32Z"><img src="https://i.ibb.co/tPPX4Gp/Screenshot-from-2024-04-03-18-00-55.png" alt="Screenshot-from-2024-04-03-18-00-55" border="0"></a></p>
+<p><strong><center> . . .</center></strong></p>
+<h2 id="03-grant-public-access">03: Grant Public Access</h2>
+<ol>
+<li>Open bucket settings and locate &ldquo;Permissions&rdquo;.</li>
+<li>Click on &ldquo;Bucket Policy&rdquo;.</li>
+<li>Use this code for your bucket policy. This allows everyone to read/view everything in the bucket. Be sure to update the Bucket-Name in the policy.</li>
+</ol>
+<p><a href="https://ibb.co/X5FPX3m"><img src="https://i.ibb.co/M1PHnGq/Screenshot-from-2024-04-03-18-02-28.png" alt="Screenshot-from-2024-04-03-18-02-28" border="0"></a></p>
+<p>Here is the code if you want to copy past</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    &#34;Version&#34;: &#34;2012-10-17&#34;,
+</span></span><span style="display:flex;"><span>    &#34;Statement&#34;: [
+</span></span><span style="display:flex;"><span>    	{
+</span></span><span style="display:flex;"><span>        	&#34;Sid&#34;: &#34;PublicReadGetObject&#34;,
+</span></span><span style="display:flex;"><span>        	&#34;Effect&#34;: &#34;Allow&#34;,
+</span></span><span style="display:flex;"><span>        	&#34;Principal&#34;: &#34;*&#34;,
+</span></span><span style="display:flex;"><span>        	&#34;Action&#34;: [
+</span></span><span style="display:flex;"><span>            	&#34;s3:GetObject&#34;
+</span></span><span style="display:flex;"><span>        	],
+</span></span><span style="display:flex;"><span>        	&#34;Resource&#34;: [
+</span></span><span style="display:flex;"><span>                &#34;arn:aws:s3:::Bucket-Name/*&#34;
+</span></span><span style="display:flex;"><span>        	]
+</span></span><span style="display:flex;"><span>    	}
+</span></span><span style="display:flex;"><span>    ]
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
+<p><strong><center> . . .</center></strong></p>
+<h2 id="step-4-integrating-aws-codepipeline-with-github">Step 4: Integrating AWS CodePipeline with GitHub</h2>
+<ol>
+<li>
+<p>Navigate to the AWS console and search for CodePipeline.</p>
+</li>
+<li>
+<p>Click &ldquo;Create Pipeline&rdquo; and assign a name. Then, proceed to the next step.</p>
+</li>
+</ol>
+<p><a href="https://imgbb.com/"><img src="https://i.ibb.co/fdxqH38/Screenshot-from-2024-04-03-18-14-43.png" alt="Screenshot-from-2024-04-03-18-14-43" border="0"></a></p>
+<p>To link CodePipeline with GitHub:</p>
+<ul>
+<li>Access the Developer Tools console at <a href="https://console.aws.amazon.com/codesuite/settings/connections">https://console.aws.amazon.com/codesuite/settings/connections</a></li>
+<li>Choose &ldquo;GitHub&rdquo; under &ldquo;Select a provider&rdquo;.</li>
+<li>Click &ldquo;Connect to GitHub&rdquo; and follow the provided instructions.</li>
+</ul>
+<ol start="4">
+<li>After connecting GitHub, return to CodePipeline and:</li>
+</ol>
+<ul>
+<li>Select &ldquo;GitHub (Version 2)&rdquo; under &ldquo;Source provider&rdquo;.</li>
+<li>Choose the GitHub connection created earlier from the dropdown menu.</li>
+<li>Specify the repository containing your project&rsquo;s source code.</li>
+<li>Select the desired branch for the pipeline.</li>
+<li>Proceed to the next step.</li>
+</ul>
+<p><a href="https://imgbb.com/"><img src="https://i.ibb.co/3dp9Cjm/Screenshot-from-2024-04-03-18-16-00.png" alt="Screenshot-from-2024-04-03-18-16-00" border="0"></a></p>
+<p><a href="https://ibb.co/jTv9WLq"><img src="https://i.ibb.co/G0vftVG/Screenshot-from-2024-04-03-18-19-10.png" alt="Screenshot-from-2024-04-03-18-19-10" border="0"></a></p>
+<ol start="5">
+<li>For building, opt hit &ldquo;skip build stage&rdquo;</li>
+</ol>
+<p><a href="https://ibb.co/cgngD8k"><img src="https://i.ibb.co/FxTxgYm/Screenshot-from-2024-04-03-18-19-58.png" alt="Screenshot-from-2024-04-03-18-19-58" border="0"></a></p>
+<ol start="6">
+<li>In the Deploy section, select the deployment target, such as an Amazon EC2 instance, Amazon ECS service, or Amazon S3 bucket.</li>
+</ol>
+<p><a href="https://ibb.co/kgtcrpD"><img src="https://i.ibb.co/KjJyQYs/Screenshot-from-2024-04-03-18-20-36.png" alt="Screenshot-from-2024-04-03-18-20-36" border="0"></a></p>
+<p>and now click &ldquo;Create&rdquo; to establish the CI/CD pipeline.</p>
+<p>Now the CI/CD pipeline will promptly initiate builds upon any alterations to the source code within your GitHub repository. Subsequently, the resulting build artifacts will be seamlessly deployed to the designated deployment target, which in this case is the specified S3 Bucket.</p>
+<p><a href="https://ibb.co/RhjtyH2"><img src="https://i.ibb.co/M8BK6Nn/Screenshot-from-2024-04-03-18-35-35.png" alt="Screenshot-from-2024-04-03-18-35-35" border="0"></a></p>
+<p><strong><center> . . .</center></strong></p>
+<p>Lastly, to view our deployed game, open a new browser tab and navigate to the AWS S3 section.</p>
+<p>Find your designated S3 bucket and click on its name to access its settings. Within the bucket, locate and click on &ldquo;Properties&rdquo;. Scroll down to the &ldquo;Static website hosting&rdquo; section.</p>
+<p>Here, you&rsquo;ll find a link labeled as the Bucket website endpoint. Click on this link to seamlessly explore our hosted game and access it publicly.</p>
+<p><a href="https://ibb.co/256srxP"><img src="https://i.ibb.co/M9hGHrp/Screenshot-from-2024-04-03-18-37-07.png" alt="Screenshot-from-2024-04-03-18-37-07" border="0"></a></p>
+<p><strong><center> . . .</center></strong></p>
+<p>Also, you can test your CI/CD pipeline by modifying your code files and committing them to your GitHub repository.</p>
+<p><a href="https://ibb.co/8Ds3946"><img src="https://i.ibb.co/fYFRHG4/Screenshot-from-2024-04-03-19-51-22.png" alt="Screenshot-from-2024-04-03-19-51-22" border="0"></a></p>
+<p><strong><center> . . .</center></strong></p>
+<h2 id="final-thoughts">Final Thoughts</h2>
+<p><strong>In summary,</strong> we&rsquo;ve built a robust CI/CD pipeline utilizing AWS tools. By integrating GitHub, AWS CodePipeline, and Amazon S3, we&rsquo;ve automated and optimized every stage of our game development process.</p>
+</section>
+
+  
+  
+  <footer class="mt-12 flex flex-wrap">
+     
+    <a
+      class="mb-1.5 mr-1.5 rounded-lg bg-black/[3%] px-5 py-1.5 no-underline dark:bg-white/[8%]"
+      href="http://localhost:1313/tags/s3"
+      >S3</a
+    >
+     
+    <a
+      class="mb-1.5 mr-1.5 rounded-lg bg-black/[3%] px-5 py-1.5 no-underline dark:bg-white/[8%]"
+      href="http://localhost:1313/tags/github"
+      >GitHub</a
+    >
+     
+    <a
+      class="mb-1.5 mr-1.5 rounded-lg bg-black/[3%] px-5 py-1.5 no-underline dark:bg-white/[8%]"
+      href="http://localhost:1313/tags/ci/cd"
+      >CI/CD</a
+    >
+    
+  </footer>
+  
+
+  
+  
+  
+  
+  <nav class="mt-24 flex rounded-lg bg-black/[3%] text-lg dark:bg-white/[8%]">
+    
+    <a
+      class="flex w-1/2 items-center rounded-l-md p-6 pr-3 font-semibold no-underline hover:bg-black/[2%] dark:hover:bg-white/[3%]"
+      href="http://localhost:1313/post/project1/"
+      ><span class="mr-1.5">←</span><span>Build AI apps with PartyRock</span></a
+    >
+    
+    
+    <a
+      class="ml-auto flex w-1/2 items-center justify-end rounded-r-md p-6 pl-3 font-semibold no-underline hover:bg-black/[2%] dark:hover:bg-white/[3%]"
+      href="http://localhost:1313/post/project2/"
+      ><span>Create AWS VPC with Subnets using Terraform - Infra As Code</span><span class="ml-1.5">→</span></a
+    >
+    
+  </nav>
+  
+  
+
+  
+  
+
+  
+  
+
+  
+
+
+  
+</article>
+
+
+    </main>
+
+    <footer
+  class="opaco mx-auto flex h-[4.5rem] max-w-3xl items-center px-8 text-[0.9em] opacity-60"
+>
+  <div class="mr-auto">
+    &copy; 2024
+    <a class="link" href="http://localhost:1313/">Tech Mesha</a>
+  </div>
+  <a class="link mx-6" href="https://gohugo.io/" rel="noopener" target="_blank"
+    >Powered by Hugo️️</a
+  >️
+  <a
+    class="link"
+    href="https://www.linkedin.com/in/mashalalbalooshi/"
+    rel="noopener"
+    target="_blank"
+    >✎ mesha</a
+  >
+</footer>
+
+  </body>
+</html>

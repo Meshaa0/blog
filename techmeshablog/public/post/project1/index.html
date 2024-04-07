@@ -1,0 +1,395 @@
+<!doctype html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<html
+  class="not-ready lg:text-base"
+  style="--bg: #faf8f1"
+  lang="en"
+>
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, shrink-to-fit=no"
+  />
+
+  
+  <title>Build AI apps with PartyRock - Tech Mesha</title>
+
+  
+  <meta name="theme-color" />
+
+  
+  
+  
+  
+  <meta name="description" content="Joining the excitement around Generative AI, AWS has introduced PartyRock, a fun tool in the Amazon Bedrock Playground. PartyRock is a no-code platform that lets anyone easily create Generative AI apps without hassle.
+You can access PartyRock through any web browser, and it doesn&rsquo;t require an AWS account. Once you make your app, you can share it by generating a link and post it on social media using #partyrockplayground." />
+  <meta name="author" content="TechMesha" />
+  
+
+  
+  
+  
+  
+  
+  
+  <link rel="preload stylesheet" as="style" href="http://localhost:1313/main.min.css" />
+
+  
+  
+  
+  
+  
+  <link rel="preload" as="image" href="http://localhost:1313/theme.png" />
+
+  
+  
+  
+  
+  <link rel="preload" as="image" href="https://i.ibb.co/qsPSHN4/mesha-logo-1.png" />
+  
+  
+
+  
+  
+  <link rel="preload" as="image" href="http://localhost:1313/twitter.svg" />
+  
+  <link rel="preload" as="image" href="http://localhost:1313/github.svg" />
+  
+  <link rel="preload" as="image" href="http://localhost:1313/linkedin.svg" />
+  
+  
+
+  
+  
+  <script
+    defer
+    src="http://localhost:1313/highlight.min.js"
+    onload="hljs.initHighlightingOnLoad();"
+  ></script>
+  
+
+  
+  
+  
+
+  
+  <link rel="icon" href="http://localhost:1313/favicon.ico" />
+  <link rel="apple-touch-icon" href="http://localhost:1313/apple-touch-icon.png" />
+
+  
+  <meta name="generator" content="Hugo 0.124.1">
+
+  
+  
+  
+</head>
+
+  <body class="text-black duration-200 ease-out dark:text-white">
+    <header class="mx-auto flex h-[4.5rem] max-w-3xl px-8 lg:justify-center">
+  <div class="relative z-50 mr-auto flex items-center">
+    <a
+      class="-translate-x-[1px] -translate-y-[1px] text-2xl font-semibold"
+      href="http://localhost:1313/"
+      >Tech Mesha</a
+    >
+    <div
+      class="btn-dark text-[0] ml-4 h-6 w-6 shrink-0 cursor-pointer [background:url(./theme.png)_left_center/_auto_theme('spacing.6')_no-repeat] [transition:_background-position_0.4s_steps(5)] dark:[background-position:right]"
+      role="button"
+      aria-label="Dark"
+    ></div>
+  </div>
+
+  <div
+    class="btn-menu relative z-50 -mr-8 flex h-[4.5rem] w-[5rem] shrink-0 cursor-pointer flex-col items-center justify-center gap-2.5 lg:hidden"
+    role="button"
+    aria-label="Menu"
+  ></div>
+
+  
+
+  <script>
+    
+    const htmlClass = document.documentElement.classList;
+    setTimeout(() => {
+      htmlClass.remove('not-ready');
+    }, 10);
+
+    
+    const btnMenu = document.querySelector('.btn-menu');
+    btnMenu.addEventListener('click', () => {
+      htmlClass.toggle('open');
+    });
+
+    
+    const metaTheme = document.querySelector('meta[name="theme-color"]');
+    const lightBg = '#faf8f1'.replace(/"/g, '');
+    const setDark = (isDark) => {
+      metaTheme.setAttribute('content', isDark ? '#000' : lightBg);
+      htmlClass[isDark ? 'add' : 'remove']('dark');
+      localStorage.setItem('dark', isDark);
+    };
+
+    
+    const darkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+    if (htmlClass.contains('dark')) {
+      setDark(true);
+    } else {
+      const darkVal = localStorage.getItem('dark');
+      setDark(darkVal ? darkVal === 'true' : darkScheme.matches);
+    }
+
+    
+    darkScheme.addEventListener('change', (event) => {
+      setDark(event.matches);
+    });
+
+    
+    const btnDark = document.querySelector('.btn-dark');
+    btnDark.addEventListener('click', () => {
+      setDark(localStorage.getItem('dark') !== 'true');
+    });
+  </script>
+
+  <div
+    class="nav-wrapper fixed inset-x-0 top-full z-40 flex h-full select-none flex-col justify-center pb-16 duration-200 dark:bg-black lg:static lg:h-auto lg:flex-row lg:!bg-transparent lg:pb-0 lg:transition-none"
+  >
+    
+    
+    <nav class="lg:ml-12 lg:flex lg:flex-row lg:items-center lg:space-x-6">
+      
+      <a
+        class="block text-center text-2xl leading-[5rem] lg:text-base lg:font-normal"
+        href="/about/"
+        >About</a
+      >
+      
+      <a
+        class="block text-center text-2xl leading-[5rem] lg:text-base lg:font-normal"
+        href="/contact/"
+        >Contact</a
+      >
+      
+    </nav>
+    
+
+    
+    <nav
+      class="mt-12 flex justify-center space-x-10 dark:invert lg:ml-12 lg:mt-0 lg:items-center lg:space-x-6"
+    >
+      
+      <a
+        class="h-8 w-8 text-[0] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./twitter.svg)"
+        href="https://twitter.com/mesha_ca"
+        target="_blank"
+        rel="me"
+      >
+        twitter
+      </a>
+      
+      <a
+        class="h-8 w-8 text-[0] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./github.svg)"
+        href="https://github.com/Meshaa0"
+        target="_blank"
+        rel="me"
+      >
+        github
+      </a>
+      
+      <a
+        class="h-8 w-8 text-[0] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./linkedin.svg)"
+        href="https://linkedin.com/in/mashalalbalooshi/"
+        target="_blank"
+        rel="me"
+      >
+        linkedin
+      </a>
+      
+    </nav>
+    
+  </div>
+</header>
+
+
+    <main
+      class="prose prose-neutral relative mx-auto min-h-[calc(100%-9rem)] max-w-3xl px-8 pb-16 pt-12 dark:prose-invert"
+    >
+      
+
+<article>
+  <header class="mb-16">
+    <h1 class="!my-0 pb-2.5">Build AI apps with PartyRock</h1>
+
+    
+    <div class="text-sm antialiased opacity-60">
+      
+      <time>Mar 4, 2024</time>
+      
+      
+      
+      
+      <span class="mx-1">&middot;</span>
+      <span>TechMesha</span>
+      
+    </div>
+    
+  </header>
+
+  <section><p><a href="https://ibb.co/WP6hCZD"><img src="https://d2908q01vomqb2.cloudfront.net/da4b9237bacccdf19c0760cab7aec4a8359010b0/2023/11/14/pr_front_1.png" alt="Screenshot-from-2024-03-02-17-52-24" border="0"></a></p>
+<p>Joining the excitement around Generative AI, AWS has introduced PartyRock, a fun tool in the Amazon Bedrock Playground. PartyRock is a no-code platform that lets anyone easily create Generative AI apps without hassle.</p>
+<p>You can access PartyRock through any web browser, and it doesn&rsquo;t require an AWS account. Once you make your app, you can share it by generating a link and post it on social media using #partyrockplayground.</p>
+<p>With PartyRock, you can personalize Generative AI models with your own data, making unique apps with text and images. The platform offers various models from top companies like Meta, Stability AI, AI21 Labs, Anthropic Cohere, and Amazon through a single API. Keep in mind that not all models are available yet.</p>
+<p>In a nutshell, PartyRock lets you experiment, learn about prompt engineering, create small apps, and share them with friends—all without needing to code or set up an AWS account.</p>
+<h1 id="create-a-fitness-app">Create a Fitness app</h1>
+<p>To begin, go to <a href="https://partyrock.aws/">https://partyrock.aws/</a>. Then, click on Sign in and log in using either my Apple, Amazon, or Google account.</p>
+<p><a href="https://ibb.co/WP6hCZD"><img src="https://d2908q01vomqb2.cloudfront.net/da4b9237bacccdf19c0760cab7aec4a8359010b0/2023/11/14/pr_signin_2.png" alt="Screenshot-from-2024-03-02-17-52-24" border="0"></a></p>
+<p>click Build your own app to get started. When you reach the app building screen, you&rsquo;ll be asked to describe what you want in your app. You have the option to start with a description for your app, or you can choose to begin with a completely empty app. Personally, I prefer the shortcut for my app, so I go with that!</p>
+<p><a href="https://ibb.co/WP6hCZD"><img src="https://d2908q01vomqb2.cloudfront.net/da4b9237bacccdf19c0760cab7aec4a8359010b0/2023/11/14/pr_main_3.png" alt="Screenshot-from-2024-03-02-17-52-24" border="0"></a></p>
+<p>My app (Full body workout Generator) is ready within a few seconds, and I enter some input to see if the output has sufficient snark for my needs. I click the Edit icon on the first widget, and see that it has a title, loading text, and a default value. The title allows widgets to reference each other by name</p>
+<p><a href="https://imgbb.com/"><img src="https://i.ibb.co/D5WnFcc/Screenshot-from-2024-03-02-17-58-50.png" alt="Screenshot-from-2024-03-02-17-58-50" border="0"></a></p>
+<p><a href="https://ibb.co/WP6hCZD"><img src="https://i.ibb.co/X3bQH1y/Screenshot-from-2024-03-02-17-52-24.png" alt="Screenshot-from-2024-03-02-17-52-24" border="0"></a></p>
+<p>I have added another user input</p>
+<p><a href="https://imgbb.com/"><img src="https://i.ibb.co/1zjWNDq/Screenshot-from-2024-03-02-18-01-49.png" alt="Screenshot-from-2024-03-02-18-01-49" border="0"></a></p>
+<p>Than, I use a text generation and I did call it meals</p>
+<p><a href="https://ibb.co/yNySftx"><img src="https://i.ibb.co/10q6v14/Screenshot-from-2024-03-02-18-06-01.png" alt="Screenshot-from-2024-03-02-18-06-01" border="0"></a></p>
+<p>The finished app looks like this</p>
+<p><a href="https://ibb.co/B40B8SJ"><img src="https://i.ibb.co/VHfTXPG/Screenshot-from-2024-03-02-18-13-04.png" alt="Screenshot-from-2024-03-02-18-13-04" border="0"></a></p>
+<p>Once I am happy with the app, I can Make public and Share
+<a href="https://partyrock.aws/u/mesha/fa9a7RE7t/Full-Body-Workout-Generator">https://partyrock.aws/u/mesha/fa9a7RE7t/Full-Body-Workout-Generator</a></p>
+<p>Finally, Here are a few important things to know about PartyRock:</p>
+<ol>
+<li>Free Trial: For a limited time, AWS is offering new PartyRock users a free trial. No credit card is needed, and you don&rsquo;t have to sign up for an AWS account. This allows you to learn the basics without worrying about costs. You can keep track of your credit usage in the Backstage section.</li>
+<li>Pricing Details: The credit usage is based on your input tokens, output tokens, and generated images. You can find more details in the Billing and Support section of the PartyRock FAQ.</li>
+<li>Model Access: They have plans to provide access to more models over time, so there will be more options for us.</li>
+<li>Upcoming Features: They actively working on adding more widgets and features to enhance your experience. Stay tuned for updates!</li>
+<li>Learning Resources:</li>
+</ol>
+<ul>
+<li>PartyRock Getting Started</li>
+<li>PartyRock FAQ</li>
+<li>PartyRock Featured Apps</li>
+</ul>
+<p>Feel free to explore and be creative! Log in to PartyRock, create something cool, and share it with your friends. Let us know what you come up with!</p>
+
+
+<style>
+.canon { background: white; width: 100%; height: auto; }
+</style>
+
+
+</section>
+
+  
+  
+  <footer class="mt-12 flex flex-wrap">
+     
+    <a
+      class="mb-1.5 mr-1.5 rounded-lg bg-black/[3%] px-5 py-1.5 no-underline dark:bg-white/[8%]"
+      href="http://localhost:1313/tags/aws"
+      >AWS</a
+    >
+     
+    <a
+      class="mb-1.5 mr-1.5 rounded-lg bg-black/[3%] px-5 py-1.5 no-underline dark:bg-white/[8%]"
+      href="http://localhost:1313/tags/cloud"
+      >Cloud</a
+    >
+    
+  </footer>
+  
+
+  
+  
+  
+  
+  <nav class="mt-24 flex rounded-lg bg-black/[3%] text-lg dark:bg-white/[8%]">
+    
+    
+    <a
+      class="ml-auto flex w-1/2 items-center justify-end rounded-r-md p-6 pl-3 font-semibold no-underline hover:bg-black/[2%] dark:hover:bg-white/[3%]"
+      href="http://localhost:1313/post/project3/"
+      ><span>Game Deployment: CI/CD Pipeline from GitHub to AWS S3</span><span class="ml-1.5">→</span></a
+    >
+    
+  </nav>
+  
+  
+
+  
+  
+
+  
+  
+
+  
+
+
+  
+</article>
+
+
+    </main>
+
+    <footer
+  class="opaco mx-auto flex h-[4.5rem] max-w-3xl items-center px-8 text-[0.9em] opacity-60"
+>
+  <div class="mr-auto">
+    &copy; 2024
+    <a class="link" href="http://localhost:1313/">Tech Mesha</a>
+  </div>
+  <a class="link mx-6" href="https://gohugo.io/" rel="noopener" target="_blank"
+    >Powered by Hugo️️</a
+  >️
+  <a
+    class="link"
+    href="https://www.linkedin.com/in/mashalalbalooshi/"
+    rel="noopener"
+    target="_blank"
+    >✎ mesha</a
+  >
+</footer>
+
+  </body>
+</html>

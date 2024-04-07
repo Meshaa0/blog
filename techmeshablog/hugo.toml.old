@@ -1,0 +1,4 @@
+baseURL = 'https://techmesha.com/'
+languageCode = 'en-us'
+title = 'TECH MESHA'
+theme = "hugo-paper"

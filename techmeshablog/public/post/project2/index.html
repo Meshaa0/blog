@@ -1,0 +1,435 @@
+<!doctype html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<html
+  class="not-ready lg:text-base"
+  style="--bg: #faf8f1"
+  lang="en"
+>
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, shrink-to-fit=no"
+  />
+
+  
+  <title>Create AWS VPC with Subnets using Terraform - Infra As Code - Tech Mesha</title>
+
+  
+  <meta name="theme-color" />
+
+  
+  
+  
+  
+  <meta name="description" content="In this article, I&rsquo;ll walk you through the simple steps of creating an AWS Virtual Private Cloud (VPC) with both public and private subnets using Terraform, while ensuring we follow the best practices.
+AWS VPC Component Below is a list of components we are going to create:
+One VPC One private subnets One public subnets One internet gateway for public internet traffic One route table One route table association Let’s Start!" />
+  <meta name="author" content="TechMesha" />
+  
+
+  
+  
+  
+  
+  
+  
+  <link rel="preload stylesheet" as="style" href="http://localhost:1313/main.min.css" />
+
+  
+  
+  
+  
+  
+  <link rel="preload" as="image" href="http://localhost:1313/theme.png" />
+
+  
+  
+  
+  
+  <link rel="preload" as="image" href="https://i.ibb.co/qsPSHN4/mesha-logo-1.png" />
+  
+  
+
+  
+  
+  <link rel="preload" as="image" href="http://localhost:1313/twitter.svg" />
+  
+  <link rel="preload" as="image" href="http://localhost:1313/github.svg" />
+  
+  <link rel="preload" as="image" href="http://localhost:1313/linkedin.svg" />
+  
+  
+
+  
+  
+  <script
+    defer
+    src="http://localhost:1313/highlight.min.js"
+    onload="hljs.initHighlightingOnLoad();"
+  ></script>
+  
+
+  
+  
+  
+
+  
+  <link rel="icon" href="http://localhost:1313/favicon.ico" />
+  <link rel="apple-touch-icon" href="http://localhost:1313/apple-touch-icon.png" />
+
+  
+  <meta name="generator" content="Hugo 0.124.1">
+
+  
+  
+  
+</head>
+
+  <body class="text-black duration-200 ease-out dark:text-white">
+    <header class="mx-auto flex h-[4.5rem] max-w-3xl px-8 lg:justify-center">
+  <div class="relative z-50 mr-auto flex items-center">
+    <a
+      class="-translate-x-[1px] -translate-y-[1px] text-2xl font-semibold"
+      href="http://localhost:1313/"
+      >Tech Mesha</a
+    >
+    <div
+      class="btn-dark text-[0] ml-4 h-6 w-6 shrink-0 cursor-pointer [background:url(./theme.png)_left_center/_auto_theme('spacing.6')_no-repeat] [transition:_background-position_0.4s_steps(5)] dark:[background-position:right]"
+      role="button"
+      aria-label="Dark"
+    ></div>
+  </div>
+
+  <div
+    class="btn-menu relative z-50 -mr-8 flex h-[4.5rem] w-[5rem] shrink-0 cursor-pointer flex-col items-center justify-center gap-2.5 lg:hidden"
+    role="button"
+    aria-label="Menu"
+  ></div>
+
+  
+
+  <script>
+    
+    const htmlClass = document.documentElement.classList;
+    setTimeout(() => {
+      htmlClass.remove('not-ready');
+    }, 10);
+
+    
+    const btnMenu = document.querySelector('.btn-menu');
+    btnMenu.addEventListener('click', () => {
+      htmlClass.toggle('open');
+    });
+
+    
+    const metaTheme = document.querySelector('meta[name="theme-color"]');
+    const lightBg = '#faf8f1'.replace(/"/g, '');
+    const setDark = (isDark) => {
+      metaTheme.setAttribute('content', isDark ? '#000' : lightBg);
+      htmlClass[isDark ? 'add' : 'remove']('dark');
+      localStorage.setItem('dark', isDark);
+    };
+
+    
+    const darkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+    if (htmlClass.contains('dark')) {
+      setDark(true);
+    } else {
+      const darkVal = localStorage.getItem('dark');
+      setDark(darkVal ? darkVal === 'true' : darkScheme.matches);
+    }
+
+    
+    darkScheme.addEventListener('change', (event) => {
+      setDark(event.matches);
+    });
+
+    
+    const btnDark = document.querySelector('.btn-dark');
+    btnDark.addEventListener('click', () => {
+      setDark(localStorage.getItem('dark') !== 'true');
+    });
+  </script>
+
+  <div
+    class="nav-wrapper fixed inset-x-0 top-full z-40 flex h-full select-none flex-col justify-center pb-16 duration-200 dark:bg-black lg:static lg:h-auto lg:flex-row lg:!bg-transparent lg:pb-0 lg:transition-none"
+  >
+    
+    
+    <nav class="lg:ml-12 lg:flex lg:flex-row lg:items-center lg:space-x-6">
+      
+      <a
+        class="block text-center text-2xl leading-[5rem] lg:text-base lg:font-normal"
+        href="/about/"
+        >About</a
+      >
+      
+      <a
+        class="block text-center text-2xl leading-[5rem] lg:text-base lg:font-normal"
+        href="/contact/"
+        >Contact</a
+      >
+      
+    </nav>
+    
+
+    
+    <nav
+      class="mt-12 flex justify-center space-x-10 dark:invert lg:ml-12 lg:mt-0 lg:items-center lg:space-x-6"
+    >
+      
+      <a
+        class="h-8 w-8 text-[0] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./twitter.svg)"
+        href="https://twitter.com/mesha_ca"
+        target="_blank"
+        rel="me"
+      >
+        twitter
+      </a>
+      
+      <a
+        class="h-8 w-8 text-[0] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./github.svg)"
+        href="https://github.com/Meshaa0"
+        target="_blank"
+        rel="me"
+      >
+        github
+      </a>
+      
+      <a
+        class="h-8 w-8 text-[0] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./linkedin.svg)"
+        href="https://linkedin.com/in/mashalalbalooshi/"
+        target="_blank"
+        rel="me"
+      >
+        linkedin
+      </a>
+      
+    </nav>
+    
+  </div>
+</header>
+
+
+    <main
+      class="prose prose-neutral relative mx-auto min-h-[calc(100%-9rem)] max-w-3xl px-8 pb-16 pt-12 dark:prose-invert"
+    >
+      
+
+<article>
+  <header class="mb-16">
+    <h1 class="!my-0 pb-2.5">Create AWS VPC with Subnets using Terraform - Infra As Code</h1>
+
+    
+    <div class="text-sm antialiased opacity-60">
+      
+      <time>Mar 20, 2024</time>
+      
+      
+      
+      
+      <span class="mx-1">&middot;</span>
+      <span>TechMesha</span>
+      
+    </div>
+    
+  </header>
+
+  <section><p><a href="https://ibb.co/ZHz2sBS"><img src="https://i.ibb.co/cbhY56w/AWS-VPC-with-Subnets.png" alt="AWS-VPC-with-Subnets" border="0"></a><br />
+In this article, I&rsquo;ll walk you through the simple steps of creating an AWS Virtual Private Cloud (VPC) with both public and private subnets using Terraform, while ensuring we follow the best practices.</p>
+<h2 id="aws-vpc-component">AWS VPC Component</h2>
+<p>Below is a list of components we are going to create:</p>
+<ul>
+<li>One VPC</li>
+<li>One private subnets</li>
+<li>One public subnets</li>
+<li>One internet gateway for public internet traffic</li>
+<li>One route table</li>
+<li>One route table association</li>
+</ul>
+<h2 id="lets-start">Let’s Start!</h2>
+<h4 id="1-create-your-working-folder">1. Create your working folder</h4>
+<p>I have chosen <em>AWS VPC - Terraform</em></p>
+<h4 id="2-create-your-provider">2. Create your provider</h4>
+<p><a href="https://ibb.co/cNr3psv"><img src="https://i.ibb.co/30Cd8Ps/Screenshot-from-2024-03-20-22-17-45.png" alt="Screenshot-from-2024-03-20-22-17-45" border="0"></a></p>
+<p>Let&rsquo;s start by creating a file called &ldquo;provider.tf&rdquo;. This file will specify that all our infrastructure will be hosted on AWS. If you ever want to switch to a different cloud provider like Google Cloud Platform (GCP) or Microsoft Azure, you&rsquo;ll need to update this file accordingly.</p>
+<p>We are ready to init!</p>
+<p>After initialization, your project folder should contain two files and one folder.</p>
+<h4 id="3-create-your-vpc">3. Create your vpc</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>resource &#34;aws_vpc&#34; &#34;myvpc&#34; {
+</span></span><span style="display:flex;"><span>  cidr_block = &#34;10.0.0.0/16&#34;
+</span></span><span style="display:flex;"><span>  tags = {
+</span></span><span style="display:flex;"><span>    name = &#34;MyTerraformVPC&#34;
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
+<h4 id="4-create-your-public-subnet">4. Create your public subnet</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>resource &#34;aws_subnet&#34; &#34;PublicSubnet&#34; {
+</span></span><span style="display:flex;"><span>  vpc_id     = aws_vpc.myvpc.id
+</span></span><span style="display:flex;"><span>  cidr_block = &#34;10.0.1.0/24&#34;
+</span></span><span style="display:flex;"><span>  tags = {
+</span></span><span style="display:flex;"><span>    Name = &#34;subnet1&#34;
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
+<h4 id="5-create-your-private-subnet">5. Create your private subnet</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>resource &#34;aws_subnet&#34; &#34;PrivateSubnet&#34; {
+</span></span><span style="display:flex;"><span>  vpc_id     = aws_vpc.myvpc.id
+</span></span><span style="display:flex;"><span>  cidr_block = &#34;10.0.2.0/24&#34;
+</span></span><span style="display:flex;"><span>  tags = {
+</span></span><span style="display:flex;"><span>    Name = &#34;subnet2&#34;
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
+<h4 id="6-create-internet-gateway">6. Create internet gateway</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>resource &#34;aws_internet_gateway&#34; &#34;igw&#34; {
+</span></span><span style="display:flex;"><span>  vpc_id = aws_vpc.myvpc.id
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
+<h4 id="7-create-route-table-for-public-subnet">7. Create route table for public subnet</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>resource &#34;aws_route_table&#34; &#34;PublicRT&#34; {
+</span></span><span style="display:flex;"><span>  vpc_id = aws_vpc.myvpc.id
+</span></span><span style="display:flex;"><span>  route {
+</span></span><span style="display:flex;"><span>    cidr_block = &#34;0.0.0.0/0&#34;
+</span></span><span style="display:flex;"><span>    gateway_id = aws_internet_gateway.igw.id
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
+<h4 id="8-create-route-table-association-for-public-subnet">8. Create route table association for public subnet</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>resource &#34;aws_route_table_association&#34; &#34;PublicRTassociation&#34; {
+</span></span><span style="display:flex;"><span>  subnet_id      = aws_subnet.PublicSubnet.id
+</span></span><span style="display:flex;"><span>  route_table_id = aws_route_table.PublicRT.id
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
+<p><a href="https://ibb.co/qrKk9GJ"><img src="https://i.ibb.co/2kxgP2Z/Screenshot-from-2024-03-20-22-17-29.png" alt="Screenshot-from-2024-03-20-22-17-29" border="0"></a></p>
+<p>Once you&rsquo;ve completed the previous step, head over to your terminal and run the command &ldquo;terraform plan&rdquo; to ensure that everything is set up correctly and there are no issues.</p>
+<p>After verifying the plan, you can proceed by executing &ldquo;terraform apply&rdquo; to implement the changes and create your AWS VPC with the specified configurations.</p>
+<p><a href="https://ibb.co/JjMfPrm"><img src="https://i.ibb.co/GQbKjCn/Screenshot-from-2024-03-20-22-18-22.png" alt="Screenshot-from-2024-03-20-22-18-22" border="0"></a></p>
+<h2 id="now-go-to-your-aws-console">Now go to your AWS Console</h2>
+<p>we can see here that our VPC is working successfuly</p>
+<p><a href="https://ibb.co/YbxCSh6"><img src="https://i.ibb.co/hCS6NVk/Screenshot-from-2024-03-20-22-14-19.png" alt="Screenshot-from-2024-03-20-22-14-19" border="0"></a></p>
+<p>Here, our 2 subnets are also working successfuly</p>
+<p><a href="https://ibb.co/XVB1HxB"><img src="https://i.ibb.co/3kX2KmX/Screenshot-from-2024-03-20-22-14-54.png" alt="Screenshot-from-2024-03-20-22-14-54" border="0"></a></p>
+<p>Route table</p>
+<p><a href="https://ibb.co/ctYnkx4"><img src="https://i.ibb.co/3WRZ4kg/Screenshot-from-2024-03-20-22-15-54.png" alt="Screenshot-from-2024-03-20-22-15-54" border="0"></a></p>
+<p>And lastly your  internet gateway</p>
+<p><a href="https://ibb.co/fnKymfx"><img src="https://i.ibb.co/mXY2Qkc/Screenshot-from-2024-03-20-22-16-22.png" alt="Screenshot-from-2024-03-20-22-16-22" border="0"></a></p>
+<h2 id="final-thoughts">Final Thoughts</h2>
+<p>In conclusion, setting up an AWS VPC with both public and private subnets using Terraform can be a straightforward process when following best practices and utilizing variables for flexibility. By carefully planning and executing each step, you can create a well-structured and efficient infrastructure environment tailored to your specific needs.. Happy Terraforming!</p>
+</section>
+
+  
+  
+  <footer class="mt-12 flex flex-wrap">
+     
+    <a
+      class="mb-1.5 mr-1.5 rounded-lg bg-black/[3%] px-5 py-1.5 no-underline dark:bg-white/[8%]"
+      href="http://localhost:1313/tags/vpc"
+      >VPC</a
+    >
+     
+    <a
+      class="mb-1.5 mr-1.5 rounded-lg bg-black/[3%] px-5 py-1.5 no-underline dark:bg-white/[8%]"
+      href="http://localhost:1313/tags/terraform"
+      >terraform</a
+    >
+     
+    <a
+      class="mb-1.5 mr-1.5 rounded-lg bg-black/[3%] px-5 py-1.5 no-underline dark:bg-white/[8%]"
+      href="http://localhost:1313/tags/aws"
+      >AWS</a
+    >
+    
+  </footer>
+  
+
+  
+  
+  
+  
+  <nav class="mt-24 flex rounded-lg bg-black/[3%] text-lg dark:bg-white/[8%]">
+    
+    <a
+      class="flex w-1/2 items-center rounded-l-md p-6 pr-3 font-semibold no-underline hover:bg-black/[2%] dark:hover:bg-white/[3%]"
+      href="http://localhost:1313/post/project3/"
+      ><span class="mr-1.5">←</span><span>Game Deployment: CI/CD Pipeline from GitHub to AWS S3</span></a
+    >
+    
+    
+  </nav>
+  
+  
+
+  
+  
+
+  
+  
+
+  
+
+
+  
+</article>
+
+
+    </main>
+
+    <footer
+  class="opaco mx-auto flex h-[4.5rem] max-w-3xl items-center px-8 text-[0.9em] opacity-60"
+>
+  <div class="mr-auto">
+    &copy; 2024
+    <a class="link" href="http://localhost:1313/">Tech Mesha</a>
+  </div>
+  <a class="link mx-6" href="https://gohugo.io/" rel="noopener" target="_blank"
+    >Powered by Hugo️️</a
+  >️
+  <a
+    class="link"
+    href="https://www.linkedin.com/in/mashalalbalooshi/"
+    rel="noopener"
+    target="_blank"
+    >✎ mesha</a
+  >
+</footer>
+
+  </body>
+</html>
