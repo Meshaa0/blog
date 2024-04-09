@@ -1,3 +1,6 @@
 [submodule "techmeshablog/themes/hugo-paper"]
 	path = techmeshablog/themes/hugo-paper
 	url = https://github.com/nanxiaobei/hugo-paper
+[submodule "themes/hugo-paper"]
+	path = themes/hugo-paper
+	url = https://github.com/nanxiaobei/hugo-paper
